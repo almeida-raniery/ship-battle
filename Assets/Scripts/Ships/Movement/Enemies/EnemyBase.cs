@@ -4,8 +4,10 @@ using UnityEngine;
 
 public abstract class EnemyBase : ShipMovement
 {
+    public Transform target;
     public float followOffset;
 
+    protected Vector2 targetPos;
     protected bool isFollowing;
 
     protected abstract void Disengage();
@@ -22,5 +24,7 @@ public abstract class EnemyBase : ShipMovement
         Vector3 rotationVector = Vector3.Cross(delta, alignAxis);
 
         torque = -rotationVector.normalized.z * steeringSpeed;
+
+        targetPos = chasePosition;
     }
 }

@@ -66,7 +66,6 @@ public class ShipMovement : MonoBehaviour
         float compensation   = hDrift * driftCompRate;
         Vector2 counterForce = compensation * -transform.right;
 
-        //Debug.DrawLine(transform.position, (Vector2)transform.position + counterForce, Color.red, 100f);
         rb2D.AddForce(counterForce, ForceMode2D.Impulse);
     }
 

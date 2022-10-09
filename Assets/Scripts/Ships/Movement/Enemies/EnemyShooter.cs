@@ -1,17 +1,31 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class EnemyShooter : EnemyBase
 {
-    public Transform target;
     public UnityEvent onPlayerClose;
     public UnityEvent onPlayerEscape;
 
+    private Cannon[] cannons;
+
+    protected override void Start()
+    {
+        base.Start();
+
+        cannons = GetComponentsInChildren<TurretCannon>();
+
+        foreach (TurretCannon cannon in cannons)
+            cannon.target = target;
+
+        Engage(target);
+    }
     protected override void FixedUpdate()
     {
         if (isFollowing)
             RotateTowardsTarget(target, transform.up);
 
+        Debug.DrawLine(transform.position, targetPos, Color.red, Time.deltaTime);
         base.FixedUpdate();
     }
 
