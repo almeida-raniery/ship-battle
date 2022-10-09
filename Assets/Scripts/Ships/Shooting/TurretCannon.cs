@@ -12,6 +12,7 @@ public class TurretCannon : FrontCannon
     public bool isAiming;
     void Start()
     {
+        bulletFactory = GameObject.FindObjectOfType<BulletFactory>();
         shootingTimer = new Timer(shootingRate, true);
     }
 
