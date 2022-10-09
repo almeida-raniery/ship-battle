@@ -12,42 +12,47 @@ public class EnemyFactory : MonoBehaviour
     public int maxPoolSize;
     public List<EnemyBase> enemyPrefabs;
 
-    private Dictionary<EnemyType, List<EnemyBase>> enemyPool;
+    private Dictionary<string, List<EnemyBase>> enemyPools;
     void Start()
     {
+        enemyPools = new Dictionary<string, List<EnemyBase>>();
+
         foreach(EnemyBase enemy in enemyPrefabs)
         {
-            EnemyType type = (EnemyType) System.Enum.Parse(typeof(EnemyType), enemy.tag, true);
+            string tag = enemy.tag;
 
-            enemyPool[type] = new List<EnemyBase>(maxPoolSize);
+            enemyPools[tag] = new List<EnemyBase>(maxPoolSize);
         }
     }
 
-    public EnemyBase GetEnemy(EnemyType type)
+    public EnemyBase GetEnemy(EnemyType enemyType)
     {
-        foreach(EnemyBase enemy in enemyPool[type]) 
+        string tag = enemyType.ToString();
+
+        foreach(EnemyBase enemy in enemyPools[tag]) 
         {
             if (!enemy.gameObject.activeInHierarchy)
                 return enemy;
         }
 
-        if (enemyPool[type].Count < maxPoolSize) 
-            return CreateEnemy((int) type);
+        if (enemyPools[tag].Count < maxPoolSize) 
+            return CreateEnemy((int) enemyType);
         
         return null;
     }
     public EnemyBase GetEnemy(int enemyIndex)
     {
         EnemyType type = (EnemyType) enemyIndex;
+        string tag     = enemyPrefabs[enemyIndex].tag;
         
-        foreach(EnemyBase enemy in enemyPool[type]) 
+        foreach(EnemyBase enemy in enemyPools[tag]) 
         {
             if (!enemy.gameObject.activeInHierarchy)
                 return enemy;
         }
 
-        if (enemyPool[type].Count < maxPoolSize) 
-            return CreateEnemy((int) type);
+        if (enemyPools[tag].Count < maxPoolSize) 
+            return CreateEnemy(enemyIndex);
         
         return null;
     }
@@ -56,25 +61,52 @@ public class EnemyFactory : MonoBehaviour
     {
         EnemyType type  = (EnemyType) System.Enum.Parse(typeof(EnemyType), enemyTag, true);
         
-        foreach(EnemyBase enemy in enemyPool[type]) 
+        foreach(EnemyBase enemy in enemyPools[tag]) 
         {
             if (!enemy.gameObject.activeInHierarchy)
                 return enemy;
         }
 
-        if (enemyPool[type].Count < maxPoolSize) 
+        if (enemyPools[tag].Count < maxPoolSize) 
             return CreateEnemy((int) type);
         
         return null;
     }
 
+    public void GenerateEnemies(string enemyTag, int amount, ref List<EnemyBase> outputList)
+    {
+        List<EnemyBase> pooledEnemies = new List<EnemyBase>();
+
+        foreach (EnemyBase enemy in enemyPools[enemyTag])
+        {
+            if (!enemy.gameObject.activeInHierarchy)
+                pooledEnemies.Add(enemy);
+
+             if (pooledEnemies.Count == amount)
+             {
+                outputList.AddRange(pooledEnemies);
+                return;
+             }
+        }
+
+        EnemyType enemyType = (EnemyType) System.Enum.Parse(typeof(EnemyType), enemyTag, true);
+
+        for(int i = 0; i < amount - pooledEnemies.Count; i++)
+        {
+            EnemyBase newEnemy  = CreateEnemy((int) enemyType);
+
+            outputList.Add(newEnemy);
+        }
+
+        return;
+    }
+
     private EnemyBase CreateEnemy(int enemyIndex)
     {
         EnemyBase enemy = Instantiate(enemyPrefabs[enemyIndex]);
-        EnemyType type  = (EnemyType) System.Enum.Parse(typeof(EnemyType), enemy.tag, true);
         
         enemy.gameObject.SetActive(false);
-        enemyPool[type].Add(enemy);
+        enemyPools[enemy.tag].Add(enemy);
 
         return enemy;
     }
