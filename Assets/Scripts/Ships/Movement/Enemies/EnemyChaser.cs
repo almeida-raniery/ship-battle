@@ -32,7 +32,18 @@ public class EnemyChaser : EnemyBase
     {
         if (other.tag == "Player")
             SetSailPos(SailPosition.Low);
-    }    
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            ShipHealth playerHealth = other.gameObject.GetComponent<ShipHealth>();
+
+            playerHealth.TakeDamage(1);
+            gameObject.SetActive(false);
+        }
+    }
 
     protected override void Disengage()
     {
