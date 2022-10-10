@@ -2,6 +2,7 @@ using UnityEngine;
 public class EnemyChaser : EnemyBase
 {
     public float disengageDelay;
+    public int damage;
     private Timer disengageTimer;
     protected override void Start()
     {
@@ -40,7 +41,7 @@ public class EnemyChaser : EnemyBase
         {
             ShipHealth playerHealth = other.gameObject.GetComponent<ShipHealth>();
 
-            playerHealth.TakeDamage(1);
+            playerHealth.TakeDamage(damage);
             gameObject.SetActive(false);
         }
     }
