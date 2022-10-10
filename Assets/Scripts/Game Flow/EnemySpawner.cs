@@ -18,7 +18,7 @@ public class EnemySpawner : MonoBehaviour
     private List<EnemyBase> remainingEnemies;
     private int currentWaveIndex;
 
-    void Start()
+    public void StartSpawn()
     {
         Random.InitState(System.DateTime.Now.Second);
         waveTimer    = new Timer(waveInterval);
@@ -94,6 +94,12 @@ public class EnemySpawner : MonoBehaviour
     void LoadNextWave()
     {
         LoadWave(currentWaveIndex + 1);
+    }
+
+    public void StopSpawn()
+    {
+        waveTimer.UnsetAlarm();
+        spawnTimer.UnsetAlarm();
     }
 
     Transform GetRandomSpawnPoint()

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum EnemyType
 {
@@ -11,6 +12,9 @@ public class EnemyFactory : MonoBehaviour
 {
     public int maxPoolSize;
     public List<EnemyBase> enemyPrefabs;
+    public AttachedHealthBar healthBarPrefab;
+    public UnityEvent enemyDeathEvent;
+    public UnityEvent enemyDamageEvent;
 
     private Dictionary<string, List<EnemyBase>> enemyPools;
     void Start()
@@ -103,9 +107,16 @@ public class EnemyFactory : MonoBehaviour
 
     private EnemyBase CreateEnemy(int enemyIndex)
     {
-        EnemyBase enemy = Instantiate(enemyPrefabs[enemyIndex]);
+        EnemyBase enemy             = Instantiate(enemyPrefabs[enemyIndex]);
+        ShipHealth enemyHealth      = enemy.GetComponentInParent<ShipHealth>();
+        AttachedHealthBar healthBar = Instantiate(healthBarPrefab);
         
         enemy.gameObject.SetActive(false);
+        
+        enemyHealth.damageEvent = enemyDamageEvent;
+        enemyHealth.deathEvent  = enemyDeathEvent;
+        healthBar.target        = enemyHealth;
+
         enemyPools[enemy.tag].Add(enemy);
 
         return enemy;

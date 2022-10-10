@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7456685666475334093}
   m_Layer: 9
   m_Name: Pirate Shooter
-  m_TagString: Untagged
+  m_TagString: Shooter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -166,8 +166,8 @@ MonoBehaviour:
   steeringSpeed: 1.2
   driftCompRate: 1
   sailPosition: 1
-  followOffset: 0
   target: {fileID: 0}
+  followOffset: 0.5
   onPlayerClose:
     m_PersistentCalls:
       m_Calls:

@@ -64,7 +64,7 @@ GameObject:
   - component: {fileID: 1285542572069248819}
   m_Layer: 9
   m_Name: Pirate Chaser
-  m_TagString: Untagged
+  m_TagString: Chaser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -208,10 +208,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fullSpeed: 20
   midSpeed: 10
-  lowSpeed: 10
+  lowSpeed: 7
   acceleration: 1.5
   steeringSpeed: 0.8
-  driftCompRate: 0.3
+  driftCompRate: 0.5
   sailPosition: 1
-  followOffset: 0
+  target: {fileID: 0}
+  followOffset: 1
   disengageDelay: 2
