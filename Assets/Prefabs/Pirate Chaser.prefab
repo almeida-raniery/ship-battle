@@ -126,7 +126,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -829131455, guid: 3675ac08c22f0b64493ade9b0c59e897, type: 3}
+  m_Sprite: {fileID: 533499021, guid: 3675ac08c22f0b64493ade9b0c59e897, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 1
@@ -216,3 +216,4 @@ MonoBehaviour:
   target: {fileID: 0}
   followOffset: 1
   disengageDelay: 2
+  damage: 0

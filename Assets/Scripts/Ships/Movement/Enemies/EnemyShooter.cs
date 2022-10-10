@@ -32,17 +32,20 @@ public class EnemyShooter : EnemyBase
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
+        {
             Disengage();
+            onPlayerClose.Invoke();
+        }
         
-        onPlayerClose.Invoke();
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
         if (other.tag == "Player")
+        {
             Engage(target.transform);
-
-        onPlayerEscape.Invoke();
+            onPlayerEscape.Invoke();
+        }
     }
 
     protected override void Engage(Transform other)
