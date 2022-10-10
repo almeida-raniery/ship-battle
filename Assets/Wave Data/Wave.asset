@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wave
   m_EditorClassIdentifier: 
   enemies:
-  - {fileID: 1285542572069248819, guid: e0ec9455e7d80464785320fa7752a34b, type: 3}
   - {fileID: 7456685666475334093, guid: 3252409f553b181408acb444f6f79ab8, type: 3}
-  enemyAmounts: 0200000001000000
-  spawnInterval: 2
+  - {fileID: 1285542572069248819, guid: e0ec9455e7d80464785320fa7752a34b, type: 3}
+  enemyAmounts: 1200000012000000
+  spawnInterval: 5
