@@ -1,7 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameStateMachine : MonoBehaviour
 {
@@ -12,9 +12,15 @@ public class GameStateMachine : MonoBehaviour
     public Canvas HudCanvas;
     public Canvas GameOverCanvas;
     public Canvas worldCanvas;
+    public Slider sessionTimeSlider;
+    public PlayerScore playerScore;
     public int sessionDuration;
-    
-    private Timer sessionTimer;
+    public Timer sessionTimer;
+
+    void Start()
+    {
+        sessionTimeSlider.onValueChanged.AddListener(SetSessionTimer);
+    }
 
     public void InitGame()
     {
@@ -30,11 +36,17 @@ public class GameStateMachine : MonoBehaviour
         enemySpawner.enabled = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(sessionTimer != null && !sessionTimer.isDone)
             sessionTimer.Tick();
+    }
+
+    public void SetSessionTimer(float timeScale)
+    {
+        int timeIncrement = (int) timeScale * 30;
+
+        sessionDuration = 60 + timeIncrement;
     }
 
     public void GameOver()
@@ -45,6 +57,7 @@ public class GameStateMachine : MonoBehaviour
 
         sessionTimer.UnsetAlarm();
         enemySpawner.StopSpawn();
+         playerScore.SetFinalScore();
     }
 
     public void Reset()
