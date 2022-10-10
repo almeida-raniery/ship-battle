@@ -57,6 +57,6 @@ public class EnemyShooter : EnemyBase
         torque      = 0;
         rb2D.angularVelocity = 0;
 
-        SetSailPos(SailPosition.None);
+        SetSailPos(SailPosition.Folded);
     }
 }

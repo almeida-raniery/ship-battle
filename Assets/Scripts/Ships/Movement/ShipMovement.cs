@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public enum SailPosition {
-    None,
+    Folded,
     Low,
     Mid,
     Full
@@ -75,6 +75,7 @@ public class ShipMovement : MonoBehaviour
 
         maxSpeed     = sailSpeeds[index];
         sailPosIndex = index;
+        sailPosition = position;
 
         return index;
     }

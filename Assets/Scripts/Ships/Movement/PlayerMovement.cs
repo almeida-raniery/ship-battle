@@ -9,7 +9,7 @@ public class PlayerMovement : ShipMovement
         ControlAcceleration();
         ControlSteering();
 
-        speedDisplay.text = string.Format("{0:00.0}m/s", rb2D.velocity.sqrMagnitude);
+        speedDisplay.text = string.Format("{0:#0.0}m/s", rb2D.velocity.sqrMagnitude);
     }
 
     void ControlAcceleration() 
