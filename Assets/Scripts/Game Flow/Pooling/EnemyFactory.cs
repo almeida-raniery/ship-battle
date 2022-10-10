@@ -13,6 +13,7 @@ public class EnemyFactory : MonoBehaviour
     public int maxPoolSize;
     public List<EnemyBase> enemyPrefabs;
     public AttachedHealthBar healthBarPrefab;
+    public Canvas worldCanvas;
     public UnityEvent enemyDeathEvent;
     public UnityEvent enemyDamageEvent;
 
@@ -115,7 +116,11 @@ public class EnemyFactory : MonoBehaviour
         
         enemyHealth.damageEvent = enemyDamageEvent;
         enemyHealth.deathEvent  = enemyDeathEvent;
+        enemyHealth.healthBar   = healthBar;
         healthBar.target        = enemyHealth;
+
+        healthBar.transform.SetParent(worldCanvas.transform);
+        healthBar.gameObject.SetActive(false);
 
         enemyPools[enemy.tag].Add(enemy);
 

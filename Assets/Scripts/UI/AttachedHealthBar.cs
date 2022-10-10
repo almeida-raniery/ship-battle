@@ -7,6 +7,10 @@ public class AttachedHealthBar : HealthBar
     protected override void Update()
     {
         base.Update();
+
         transform.position = target.transform.position + offset;
+
+        if(!target.gameObject.activeInHierarchy)
+            gameObject.SetActive(false);
     }
 }

@@ -27,7 +27,7 @@ public class SpreadCannon : Cannon
             CannonBall bullet   = MakeBullet();
 
             bullet.transform.rotation = rotation;
-            bullet.transform.position = new Vector3(transform.position.x, transform.position.y, 10);
+            bullet.transform.position = new Vector3(transform.position.x, transform.position.y, 1);
 
             bullet.gameObject.SetActive(true);
         }

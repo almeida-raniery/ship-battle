@@ -29,7 +29,7 @@ public class GameStateMachine : MonoBehaviour
         playerObject.SetActive(true);
         HudCanvas.gameObject.SetActive(true);
         mainMenuCanvas.gameObject.SetActive(false);
-        worldCanvas.gameObject.SetActive(false);
+        worldCanvas.gameObject.SetActive(true);
         sessionTimer.SetAlarm(GameOver);
         enemySpawner.StartSpawn();
 

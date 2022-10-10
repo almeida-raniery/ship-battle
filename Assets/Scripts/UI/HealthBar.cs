@@ -20,7 +20,7 @@ public class HealthBar : MonoBehaviour
     {
         float fillPercent = fillStep * target.health;
         
-        element.fillAmount         = fillPercent;
+        element.fillAmount = fillPercent;
 
         if (fillPercent < 0.75f)
             element.color = Color.yellow;

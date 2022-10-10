@@ -80,12 +80,16 @@ public class EnemySpawner : MonoBehaviour
             return;
         }
 
-        Transform spawnPoint = GetRandomSpawnPoint();
-        EnemyBase enemy      = remainingEnemies[0];
+        Transform spawnPoint        = GetRandomSpawnPoint();
+        EnemyBase enemy             = remainingEnemies[0];
+        ShipHealth enemyHealth      = enemy.GetComponent<ShipHealth>();
+        HealthBar healthBar         = enemyHealth.healthBar;
 
-        enemy.target             = playerTransform;
-        enemy.transform.position = spawnPoint.position;
-
+        enemy.target                 = playerTransform;
+        enemy.transform.position     = spawnPoint.position;
+        healthBar.transform.position = enemy.transform.position;
+        
+        healthBar.gameObject.SetActive(true);
         enemy.gameObject.SetActive(true);
 
         remainingEnemies.RemoveAt(0);

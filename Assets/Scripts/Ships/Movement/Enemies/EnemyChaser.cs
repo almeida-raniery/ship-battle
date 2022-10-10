@@ -44,6 +44,10 @@ public class EnemyChaser : EnemyBase
             playerHealth.TakeDamage(damage);
             gameObject.SetActive(false);
         }
+        else
+        {
+            SetSailPos(SailPosition.Folded);
+        }
     }
 
     protected override void Disengage()
